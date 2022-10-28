@@ -34,6 +34,20 @@ void createTaskLL(int info,int info1,int info2,int info3,char name[],char desc[]
             ptr->next=temp;
         }
 }
+int checkTask(int taskId){
+    task *tmp;
+    tmp=taskHead;
+    while(tmp!=NULL)
+    {
+        if (tmp->taskId==taskId){
+            return 1;
+            break;
+        }   
+        tmp=tmp->next ;
+    }
+    return 0;
+
+}
 /* This function is providing head of linked list to the updateUserStoriesLLfromTaskData()*/
 void calculations(){
     task *temp;

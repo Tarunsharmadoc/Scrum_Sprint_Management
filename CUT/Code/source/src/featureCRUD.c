@@ -61,3 +61,12 @@ void loadFeatures(){
 void freeFeatures(){
 	free(f1);
 }
+/*This function will if check the feature id is present in csv or not.*/
+int checkFeature(int fid){
+	if (f1->featureId==fid){
+		return 1;
+	}
+	else{
+		return 0;
+	}
+}

@@ -30,4 +30,7 @@ extern void freeStructures();
 extern void freeUserStoriesLL();
 extern void freeTasksLL();
 extern void freeFeatures();
+extern int checkFeature();
+extern int checkTask();
+extern int checkStory();
 #endif

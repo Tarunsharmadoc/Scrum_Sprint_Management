@@ -32,6 +32,20 @@ void createUserStoryLL(int info,int info1,double info2,char name[],char desc[])
             ptr->next=temp;
         }
 }
+/*This will check if the story id is present or not in Linked list*/
+int checkStory(int storyId){
+    userStory *ptr;
+    ptr=userStoryHead;
+    while(ptr!=NULL)
+    {
+        if (ptr->storyId==storyId){
+            return 1;
+            break;
+        }
+        ptr=ptr->next ;
+    }
+    return 0;
+}
 /*This function will print the Linked List of User Stories with all values present in it*/
 void displayUserStoryLL()
 {

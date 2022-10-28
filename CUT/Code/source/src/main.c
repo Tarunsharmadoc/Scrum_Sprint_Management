@@ -17,7 +17,8 @@ int main()
 	while(ch!=0)
 	{
 		printf("\n1 to Login as Scrum Master:");
-		printf("\n2 to Login as Team Member:\n");
+		printf("\n2 to Login as Team Member:");
+		printf("\n0 to Exit:\n");
 		scanf("%d",&ch);
 		if (ch==1)
 		{
@@ -31,9 +32,8 @@ int main()
 			userBelonging=checkLogin(userId,userPassword);
 			if (userBelonging==-1)
 			{
-				printf("\nEither userid or password is incorrect!");
-				freeStructures();
-				exit(0);
+				printf("\nEither userid or password is incorrect!\n");
+				continue;
 			}
 			else if(userBelonging==1)
 			{
@@ -53,27 +53,43 @@ int main()
 						displayUserStoryLL();
 						printf("\n");
 						displayTaskLL();
+						continue;
 					}
 					else if(tlChoice1==2)
 					{
 						int storyId,featureId;
 						double completionStatus;
-						char storyName[STORY_NAME_LEN];
+						char storyName[STORY_NAME_LEN]; 
 						char storyDesc[STORY_DESC_LEN];
 						printf("\nEnter User Story Details:");
 						printf("\nEnter Story ID:");
 						scanf("%d",&storyId);
 						printf("\nEnter Feature ID:");
 						scanf("%d",&featureId);
-						printf("\nEnter Completion Status:");
-						scanf("%lf",&completionStatus);
-						printf("\nEnter Story Name:");
-						scanf("%s",storyName);
-						printf("\nEnter Story Description:");
-						scanf("%s",storyDesc);
-						insert_end(storyId,featureId,completionStatus,storyName,storyDesc);
-						appendUserStoryCSV(storyId,featureId,completionStatus,storyName,storyDesc);
-						displayUserStoryLL();
+						int res=checkFeature(featureId);
+						if (res==0){
+							printf("\nFeature Id is not present Currently!\n");
+							continue;
+						}
+						else{
+							printf("\nEnter Completion Status:");
+							scanf("%lf",&completionStatus);
+							printf("\nEnter Story Name:");
+							scanf("%s",storyName);
+							printf("\nEnter Story Description:");
+							scanf("%s",storyDesc);
+							if((storyId<0 || storyId>99999) || (featureId<0 || featureId>99) || (completionStatus<0 || completionStatus>100)){
+								printf("\nEntered data is not Correct!\n");
+								continue;
+							}
+							else{
+								insert_end(storyId,featureId,completionStatus,storyName,storyDesc);
+								appendUserStoryCSV(storyId,featureId,completionStatus,storyName,storyDesc);
+								displayUserStoryLL();
+								continue;
+							}
+						}
+						
 					}
 					else if(tlChoice1==3)
 					{
@@ -85,17 +101,38 @@ int main()
 						scanf("%d",&taskId);
 						printf("\nEnter Story ID:");
 						scanf("%d",&storyId);
-						printf("\nEnter Completion Status:");
-						scanf("%d",&completionStatusTask);
-						printf("\nEnter User ID:");
-						scanf("%d",&userId);
-						printf("\nEnter Task Name:");
-						scanf("%s",taskName);
-						printf("\nEnter Task Description:");
-						scanf("%s",taskDesc);
-						appendTaskLL(taskId,storyId,completionStatusTask,userId,taskName,taskDesc);
-						appendTasksCSV(taskId,storyId,completionStatusTask,userId,taskName,taskDesc);
-						displayTaskLL();
+						int res=checkStory(storyId);
+						if (res==0){
+							printf("\nInvalid Story Id.\n");
+							continue;
+						}
+						else{
+							printf("\nEnter Completion Status:");
+							scanf("%d",&completionStatusTask);
+							printf("\nEnter User ID:");
+							scanf("%d",&userId);
+							printf("\nEnter Task Name:");
+							scanf("%s",taskName);
+							printf("\nEnter Task Description:");
+							scanf("%s",taskDesc);
+							if((taskId<0 || taskId>99999) || (storyId<0 || storyId>99) || (userId<0 || userId>99)|| (completionStatusTask<0 || completionStatusTask>100)){
+								printf("\nEntered data is not Correct!\n");
+								continue;
+							}
+							else{
+								appendTaskLL(taskId,storyId,completionStatusTask,userId,taskName,taskDesc);
+								appendTasksCSV(taskId,storyId,completionStatusTask,userId,taskName,taskDesc);
+								displayTaskLL();
+								continue;
+							}
+						}	
+					}
+					else{
+						if(tlChoice1!=0){
+							printf("\nPlease enter a valid choice!\n");
+							continue;
+						}
+						
 					}
 				}
 				freeStructures();
@@ -103,12 +140,11 @@ int main()
 			}
 			else
 			{
-				printf("\nYou cannot login as Scrum Master from here!");
-				freeStructures();
-				exit(0);
+				printf("\nYou cannot login as Scrum Master from here!\n");
+				continue;
 			}
 		}
-		if (ch==2)
+		else if (ch==2)
 		{
 			int userId;
 			char userPassword[50];
@@ -120,9 +156,8 @@ int main()
 			userBelonging=checkLogin(userId,userPassword);
 			if (userBelonging==-1)
 			{
-				printf("\nEither userid or password is incorrect!");
-				freeStructures();
-				exit(0);
+				printf("\nEither userid or password is incorrect!\n");
+				continue;
 			}
 			else if(userBelonging==0)
 			{
@@ -131,7 +166,8 @@ int main()
 				while(tlchoice2!=0)
 				{
 					printf("\n1. To print My Assigned Tasks:");
-					printf("\n2. To Update Task:\n");
+					printf("\n2. To Update Task:");
+					printf("\n0. To Exit:\n");
 					scanf("%d",&tlchoice2);
 					if (tlchoice2==1)
 					{
@@ -143,16 +179,26 @@ int main()
 						int taskId,completionStatus;
 						printf("\n Enter Task ID to Update:");
 						scanf("%d",&taskId);
-						printf("\n Enter New Completion Status:");
-						scanf("%d",&completionStatus);
-						updateCompletionStatus(taskId,completionStatus);
-						calculations();
-						continue;
+						int res=checkTask(taskId);
+						if (res==0){
+							printf("\nInvalid Task Id:\n");
+							continue;
+						}
+						else{
+							printf("\n Enter New Completion Status:");
+							scanf("%d",&completionStatus);
+							updateCompletionStatus(taskId,completionStatus);
+							calculations();
+							continue;
+						}	
 					}
 					else
 					{
-						freeStructures();
-						exit(0);
+						if (tlchoice2!=0){
+							printf("\nEnter a valid choice!\n");
+							continue;
+						}
+						
 					}
 				}
 				freeStructures();
@@ -160,13 +206,18 @@ int main()
 			}
 			else
 			{
-				printf("\nYou cannot login as Scrum Master from here!");
-				freeStructures();
-				exit(0);
+				printf("\nYou cannot login as Scrum Master from here!\n");
+				continue;
+			}
+		}
+		else{
+			if(ch!=0){
+				printf("\nPlease enter a valid choice!\n");
+				continue;
 			}
 		}
 	}
 	freeStructures();
-	printf("\nExiting...!");
+	printf("\nExiting...!\n");
 	exit(0);
 }
