@@ -4,7 +4,7 @@ INCLUDEDIR = ../include
 OBJDIR = ../obj
 BINDIR = ../bin
 REPORTDIR = ../reports
-CFLAGS = -c -g -Wall -I${INCLUDEDIR} -I../external/include -DLOG_USE_COLOR
+CFLAGS = -c -g -Wall -I${INCLUDEDIR} -I../external/include
 
 all:
 

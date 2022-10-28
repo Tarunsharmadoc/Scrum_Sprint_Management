@@ -70,3 +70,14 @@ int checkFeature(int fid){
 		return 0;
 	}
 }
+/*This feature will update the completion status of Feature*/
+void updateFeature(double status){
+	f1->completionStatus=status;
+	updateFeatureCSV();
+}
+/*This feature will update the CSV of feature*/
+void updateFeatureCSV(){
+	FILE *ptr=fopen("../external/features.csv","w");
+	fprintf(ptr,"%d,%lf,%s,%s\n",f1->featureId,f1->completionStatus,f1->featureName,f1->featureDesc);
+	fclose(ptr);
+}

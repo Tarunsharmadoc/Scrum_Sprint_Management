@@ -33,4 +33,7 @@ extern void freeFeatures();
 extern int checkFeature();
 extern int checkTask();
 extern int checkStory();
+extern void updateFeature(double status);
+extern void updateFeatureCSV();
+extern void updateFeatureFromUserStory();
 #endif

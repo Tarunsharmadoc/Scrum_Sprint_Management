@@ -46,6 +46,11 @@ int checkStory(int storyId){
     }
     return 0;
 }
+/*This will update the feature completion status when user story is updated*/
+void updateFeatureFromUserStory(){
+    double featureStatus=userStoryHead->completionStatus;
+    updateFeature(featureStatus);
+}
 /*This function will print the Linked List of User Stories with all values present in it*/
 void displayUserStoryLL()
 {

@@ -115,7 +115,7 @@ int main()
 							scanf("%s",taskName);
 							printf("\nEnter Task Description:");
 							scanf("%s",taskDesc);
-							if((taskId<0 || taskId>99999) || (storyId<0 || storyId>99) || (userId<0 || userId>99)|| (completionStatusTask<0 || completionStatusTask>100)){
+							if((taskId<0 || taskId>99999) || (storyId<0 || storyId>99) || (userId<0 || userId>99999)|| (completionStatusTask<0 || completionStatusTask>100)){
 								printf("\nEntered data is not Correct!\n");
 								continue;
 							}
@@ -189,6 +189,7 @@ int main()
 							scanf("%d",&completionStatus);
 							updateCompletionStatus(taskId,completionStatus);
 							calculations();
+							updateFeatureFromUserStory();
 							continue;
 						}	
 					}
