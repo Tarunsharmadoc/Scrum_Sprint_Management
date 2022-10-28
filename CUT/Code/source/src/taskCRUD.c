@@ -8,6 +8,7 @@
 #define LINE_SIZE 500
 
 task *taskHead=NULL;
+/*This function will take the input values and create a task Linked list*/
 void createTaskLL(int info,int info1,int info2,int info3,char name[],char desc[])
 {
         task *temp,*ptr;
@@ -33,11 +34,13 @@ void createTaskLL(int info,int info1,int info2,int info3,char name[],char desc[]
             ptr->next=temp;
         }
 }
+/* This function is providing head of linked list to the updateUserStoriesLLfromTaskData()*/
 void calculations(){
     task *temp;
     temp=taskHead;
     updateUserStoriesLLfromTaskData(temp);
 }
+/*This function will update the completion status of a Task when user enter new value of completion status*/
 void updateCompletionStatus(int taskId,int newCompletionStatus){
     task *ptr;
     if(taskHead==NULL)
@@ -59,6 +62,7 @@ void updateCompletionStatus(int taskId,int newCompletionStatus){
     }
     updateTaskCSVFromLL();
 }
+/*This function will update the tasks.csv file if the Linked List of user Stories is updated*/
 void updateTaskCSVFromLL(){
     task *ptr;
     if(taskHead==NULL)
@@ -77,6 +81,7 @@ void updateTaskCSVFromLL(){
         fclose(taskFile);
     }
 }
+/*This function will print the Linked List of task with all values present in it*/
 void displayTaskLL()
 {
         task *ptr;
@@ -103,6 +108,7 @@ void displayTaskLL()
             printf("\n-------------------------------------------END of Tasks---------------------------------------------\n");
         }
 }
+/*This function will display the tasks assigned to a user by Scrum Master by taking useId as input*/
 void displayUserTasks(int userid){
     task *ptr;
     if(taskHead==NULL)
@@ -129,6 +135,7 @@ void displayUserTasks(int userid){
         printf("\n-----------------------------END of Assigned Tasks----------------------------------\n");
     }
 }
+/*This function will append the Linked List of Tasks*/
 void appendTaskLL(int a,int b,int c,int d,char name[],char desc[])
 {
     task *temp,*ptr;
@@ -161,6 +168,7 @@ void appendTaskLL(int a,int b,int c,int d,char name[],char desc[])
     }
     
 }
+/*This function will load the Tasks from tasks.csv and create a linked list by extracting the data from CSV*/
 void loadTasks(){
     FILE *taskFile=fopen("../external/tasks.csv","r");
     if (taskFile==NULL){
@@ -197,6 +205,7 @@ void loadTasks(){
     }
     fclose(taskFile);
 }
+/*This function will take the input and append the tasks.csv file with given values*/
 void appendTasksCSV(int a,int b,int c,int d,char name[],char desc[]){
     FILE *taskFile=fopen("../external/tasks.csv","a");
     if (taskFile==NULL){
@@ -208,6 +217,7 @@ void appendTasksCSV(int a,int b,int c,int d,char name[],char desc[]){
     }   
     fclose(taskFile);
 }
+/*This function will free the memory taken by Tasks Linked List when program is exiting*/
 void freeTasksLL(){
     task *tempNode=NULL;
     while ((tempNode=taskHead)!=NULL)

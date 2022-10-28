@@ -7,6 +7,7 @@
 #include <task.h>
 #define LINE_SIZE 500
 userStory *userStoryHead=NULL;
+/*This function will take the input values and create a User Story Linked list*/
 void createUserStoryLL(int info,int info1,double info2,char name[],char desc[])
 {
         userStory *temp,*ptr;
@@ -31,6 +32,7 @@ void createUserStoryLL(int info,int info1,double info2,char name[],char desc[])
             ptr->next=temp;
         }
 }
+/*This function will print the Linked List of User Stories with all values present in it*/
 void displayUserStoryLL()
 {
         userStory *ptr;
@@ -56,6 +58,7 @@ void displayUserStoryLL()
             printf("\n--------------------------------------------END of User Stories---------------------------------------------\n");
         }
 }
+/*This function will take the input and append the userStories.csv file with given values*/
 void appendUserStoryCSV(int a,int b,double c,char name[],char desc[]){
     FILE *userStoryFile=fopen("../external/userStories.csv","a");
     if (userStoryFile==NULL){
@@ -67,6 +70,7 @@ void appendUserStoryCSV(int a,int b,double c,char name[],char desc[]){
     }   
     fclose(userStoryFile);
 }
+/*This function will take values and append the User Story Linked List with a new node*/
 void insert_end(int a,int b,double c,char name[],char desc[])
 {
     userStory *temp,*ptr;
@@ -97,6 +101,8 @@ void insert_end(int a,int b,double c,char name[],char desc[])
         ptr->next =temp;
     }
 }
+/*This function will update the completion status of the User Story if the task of that user Story updated
+by the user*/
 void updateUserStoriesLLfromTaskData(task *taskHead){
     userStory *userStoryptr;
     task *taskPtr;
@@ -118,6 +124,7 @@ void updateUserStoriesLLfromTaskData(task *taskHead){
     }
     updateUserStoryCSVFromLL();
 }
+/*This function will update the userStories.csv file if the Linked List of user Stories is updated*/
 void updateUserStoryCSVFromLL(){
     userStory *ptr;
     if(userStoryHead==NULL)
@@ -136,6 +143,7 @@ void updateUserStoryCSVFromLL(){
         fclose(taskFile);
     }
 }
+/*This function will load the data in userStories.csc and create a user Stories Linked List from it when the program starts*/
 void loadUserStories(){
     FILE *userStoryFile=fopen("../external/userStories.csv","r");
     if (userStoryFile==NULL){
@@ -170,6 +178,7 @@ void loadUserStories(){
     }
     fclose(userStoryFile);
 }
+/*This function will free the User Stories Linked List memory when program is exiting*/
 void freeUserStoriesLL(){
     userStory *tempNode=NULL;
     while ((tempNode=userStoryHead)!=NULL)

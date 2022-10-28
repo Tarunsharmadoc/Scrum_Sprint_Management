@@ -5,6 +5,9 @@
 #include <userStory.h>
 #include <main.h>
 #include <stdlib.h>
+
+/*This function will check for the user is present in the CSV or not and if it is present in the CSV
+then it will check that the user is Scrum Master or Team Member and return 1 if user is Scrum Master and 0 if its Team Member*/
 int checkLogin(int userId,char password[]){
     int userResult=-1;
     char* data;
@@ -31,7 +34,8 @@ int checkLogin(int userId,char password[]){
     fclose(usersDataFile);
     return userResult;
 }
-
+/*This function will free the memory taken by all Linked Lists in the program for example UserStories
+,Tasks and Feature structure*/
 void freeStructures(){
     freeUserStoriesLL();
 	freeTasksLL();

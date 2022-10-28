@@ -10,7 +10,7 @@ int main()
 	loadFeatures();
 	loadUserStories();
 	loadTasks();
-	printf("\n\t####################################################");
+	printf("\n\t###################################################");
     printf("\n\t###     Welcome to Scrum Sprint Management      ###");
     printf("\n\t###################################################");
 	int ch=1;

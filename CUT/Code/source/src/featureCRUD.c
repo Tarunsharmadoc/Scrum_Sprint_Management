@@ -7,6 +7,7 @@
 #include <stdlib.h>
 #define LINE_SIZE 500
 feature *f1=NULL;
+/*This function will print the Features*/
 void printFeatures(){
 	printf("\n------------------------------------------------Feature Details------------------------------------------------\n");
 	printf("\nFeature ID:\tCompletion Status:\tFeature Name:\t\t\tFeature Info:");
@@ -18,6 +19,8 @@ void printFeatures(){
 
 }
 
+/*This function will load the Feature details from the features.csv file and creating a structure of feature with the values
+present in the features.csv file*/
 void loadFeatures(){
 	feature *temp;
     temp=(feature *)malloc(sizeof(feature));
@@ -54,6 +57,7 @@ void loadFeatures(){
 	fclose(feature_file);
 	f1=temp;
 }
+/*This will free the memory of structure created for the feature file*/
 void freeFeatures(){
 	free(f1);
 }
